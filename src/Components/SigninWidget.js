@@ -4,6 +4,9 @@ import ReactDOM from 'react-dom';
 import { OktaSignIn } from '@okta/okta-signin-widget';
 import '@okta/okta-signin-widget/css/okta-sign-in.min.css';
 
+// Custom component --> UI 
+
+
 class SignInWidget extends Component {
     componentDidMount() {
         const el = ReactDOM.findDOMNode(this);
@@ -19,7 +22,9 @@ class SignInWidget extends Component {
     }
 
     render() {
+
         return <div />;
+        
     }
 }
 

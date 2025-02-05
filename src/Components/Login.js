@@ -1,24 +1,12 @@
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 import React, { Component } from 'react';
 import { Redirect } from 'react-router-dom';
+
+// redirect the user onces successfull autheciated
+
 import SigninWidget from './SigninWidget';
 import { withOktaAuth } from '@okta/okta-react';
+
 
 class Login extends Component {
     constructor(props){
@@ -28,6 +16,8 @@ class Login extends Component {
         };
         this.checkAuthentication();
     }
+
+    // this.checkAuthentication();
 
     async checkAuthentication() {
         const authenticated = await this.props.oktaAuth.isAuthenticated();

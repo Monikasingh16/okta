@@ -5,6 +5,7 @@ import { Link } from 'react-router-dom';
 
 
  class Navbar extends Component {
+
   render() {
     return (
       <div>
@@ -22,14 +23,20 @@ import { Link } from 'react-router-dom';
                         <span className="navbar-toggler-icon"/>
                 </button>
 
+                {/* navbar navbar-expand-sm */}
+
                 <div className="collapse navbar-collapse" id="navbarNav">
                     <ul className="navbar nav ml-auto">
+                 
+
                         <li className="nav-item">
                             <Link className="nav-link" to="/">Home</Link>
                         </li>
+
                         <li className="nav-item">
                             <Link className="nav-link" to="/staff">Staff</Link>
                         </li>
+                        
                     </ul>
                 </div>
 
