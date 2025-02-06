@@ -4,11 +4,20 @@ import { Redirect } from 'react-router-dom';
 
 // redirect the user onces successfull autheciated
 
-import SigninWidget from './SigninWidget';
+import SigninWidget from './SigninWidget'; 
+
+//  custom component 
+
 import { withOktaAuth } from '@okta/okta-react';
 
+// Uses withOktaAuth() to get authentication-related methods (isAuthenticated, signInWithRedirect, etc.).
+
+//  higher order autheication provides the authecations related props
+
+//  class based component declarations
 
 class Login extends Component {
+    // withoktaauth
     constructor(props){
         super(props);
         this.state ={
@@ -19,20 +28,35 @@ class Login extends Component {
 
     // this.checkAuthentication();
 
+
+
     async checkAuthentication() {
         const authenticated = await this.props.oktaAuth.isAuthenticated();
-        if (authenticated !== this.state.authenticated) {
+
+        // oktaAuth is provided via withOktaAuth(Login), and this method checks if the user is logged in.
+
+        if (authenticated !== this.state.authenticated)
+        {
             this.setState({ authenticated });
         }
     }
 
+
     componentDidUpdate(){
+
+        //  this runs when the compoenent updates(re-renders)
+
         this.checkAuthentication();
     }
+
+
 
     onSuccess = (res) => {
         return this.props.oktaAuth.signInWithRedirect({
             sessionToken: res.session.token
+
+            //  Receives a session token after successful login.
+
         });
     }
 
@@ -40,16 +64,27 @@ class Login extends Component {
         console.log('Error logging in:', err);
     }
 
+
+    //  Rendering the component..
     render() {
-        if (this.state.authenticated === null) return null;
+        if (this.state.authenticated === null) 
+            return null;
+
+        //  ternary operator
+
         return this.state.authenticated ? 
-            <Redirect to={{ pathname: '/' }} /> :
+        // true
+            <Redirect to={{ pathname: '/' }} /> :  
+            // false
             <SigninWidget
-                baseUrl={this.props.baseUrl}
-                onSuccess={this.onSuccess}
-                onError={this.onError}
+                baseUrl={this.props.baseUrl}  //the okta authentication server URL
+                onSuccess={this.onSuccess}    //funtion to handle successful login
+                onError={this.onError}        // function to handle the login errors
             />;
     }
 }
 
 export default withOktaAuth(Login);
+
+//  wraps the login component with the Okta's authecation functionlaity
+

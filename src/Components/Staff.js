@@ -6,6 +6,7 @@ import React, { Component } from 'react'
         currentUserName:'',
         currentUserEmail:''
     }
+//   props
     componentDidMount(){
         const idToken = JSON.parse(localStorage.getItem('okta-token-storage'));
         this.setState({

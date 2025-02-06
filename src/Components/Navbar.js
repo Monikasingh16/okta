@@ -3,14 +3,15 @@ import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
 
 
-
  class Navbar extends Component {
 
   render() {
     return (
+
       <div>
         <nav className="navbar navbar-expand-sm navbar-dark bg-dark mb-4">
             <div className="container">
+
                 <Link className="navbar-brand" to="/">Miracle software systems
                 </Link>
 
@@ -20,6 +21,7 @@ import { Link } from 'react-router-dom';
                     data-toggle= "collapse"
                     data-target="#navbarNav"
                     >
+                        
                         <span className="navbar-toggler-icon"/>
                 </button>
 
@@ -36,7 +38,7 @@ import { Link } from 'react-router-dom';
                         <li className="nav-item">
                             <Link className="nav-link" to="/staff">Staff</Link>
                         </li>
-                        
+
                     </ul>
                 </div>
 
