@@ -21,11 +21,12 @@ import React, { Component } from 'react'
     const { currentUserEmail, currentUserName } = this.state;
     return (
       <div>
-        <h1>Welcome { currentUserName} </h1>
-        <p>Email: { currentUserEmail }</p>
-     
 
+        <h1>Welcome { currentUserName} </h1>
         
+
+        <p>Email: { currentUserEmail }</p> 
+
       </div>
     )
   }
