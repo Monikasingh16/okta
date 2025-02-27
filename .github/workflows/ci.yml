@@ -1,41 +1,76 @@
-name: React.js CI/CD
+# name: React.js CI/CD
 
-on:
-  push:
-    branches: [ "main" ]
-  pull_request:
-    branches: [ "main" ]
+# on:
+#   push:
+#     branches: [ "main" ]
+#   pull_request:
+#     branches: [ "main" ]
+
+# jobs:
+#   build-and-test:
+
+#     runs-on: ubuntu-latest
+
+#     strategy:
+#       matrix:
+#         node-version: [18.x, 20.x, 22.x]
+
+#     steps:
+#     - name: Checkout repository
+#       uses: actions/checkout@v4
+
+#     - name: Setup Node.js
+#       uses: actions/setup-node@v4
+#       with:
+#         node-version: ${{ matrix.node-version }}
+#         cache: 'npm'  # Caching npm dependencies for faster installs
+
+#     - name: Install dependencies
+#       run: npm ci  # Ensures clean and consistent dependency installation
+
+#     - name: Build React App
+#       run: npm run build
+
+#     - name: Run Tests
+#       run: npm test -- --watch=false --ci
+
+#     - name: Upload Build Artifacts
+#       uses: actions/upload-artifact@v4
+#       with:
+#         name: build
+#         path: build  # The default output directory for React apps
+
+
+
+
+
+#  new code from here..
+
 
 jobs:
-  build-and-test:
-
+  build:
     runs-on: ubuntu-latest
 
-    strategy:
-      matrix:
-        node-version: [18.x, 20.x, 22.x]
+    #  many other os can be used like windows-latest, macos-latest, linux-latest using the matrix(os)
+
+
+    #  Like for every job there is virtual machine is created 
 
     steps:
-    - name: Checkout repository
-      uses: actions/checkout@v4
+      - name: Build App
+        run: npm run build
+      - name: Save Build
+        uses: actions/upload-artifact@v4
+        with:
+          name: build
+          path: build
 
-    - name: Setup Node.js
-      uses: actions/setup-node@v4
-      with:
-        node-version: ${{ matrix.node-version }}
-        cache: 'npm'  # Caching npm dependencies for faster installs
-
-    - name: Install dependencies
-      run: npm ci  # Ensures clean and consistent dependency installation
-
-    - name: Build React App
-      run: npm run build
-
-    - name: Run Tests
-      run: npm test -- --watch=false --ci
-
-    - name: Upload Build Artifacts
-      uses: actions/upload-artifact@v4
-      with:
-        name: build
-        path: build  # The default output directory for React apps
+  test:
+    runs-on: ubuntu-latest
+    needs: build
+    steps:
+      - name: Get Build
+        uses: actions/download-artifact@v4
+        with:
+          name: build
+      - run: npm test
